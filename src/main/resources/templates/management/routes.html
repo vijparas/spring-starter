@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Vnl User Creation Panel</title>
+
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+	th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+
+		<h2 th:text="${message}"></h2>
+		<h2>Roles</h2>
+		<div>
+			<table class="table">
+				<thead>
+					<tr>
+
+						<th>path</th>
+						<th>methods</th>
+						<th>consumes</th>
+						<th>produces</th>
+						<th>params</th>
+						<th>headers</th>
+						<th>custom</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="endPoint : ${endPoints}">
+						<td th:text="${endPoint.patternsCondition}" />
+						<td th:text="${endPoint.methodsCondition}" />
+						<td th:text="${endPoint.consumesCondition}" />
+						<td th:text="${endPoint.producesCondition}" />
+						
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

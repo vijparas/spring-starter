@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Vnl User Creation Panel</title>
+
+   <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    
+	<h2 th:text="${message}"></h2>
+    <h2>Roles</h2>
+    <div>
+        <table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Role</th>
+      <th scope="col">Active</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+  th:each="role : ${roles}">
+    <td th:text="${role.role}" />
+    <td th:text="${role.active}" />
+	<td><a th:href="@{'/role/update/' + ${role.id}}" class="btn btn-primary">Update</a></td>
+	<td><a th:href="@{'/role/delete/' + ${role.id}}" class="btn btn-danger">Delete</a></td>
+</tr>
+  </tbody>
+</table>
+    </div>
+</div>
+
+</body>
+</html>
