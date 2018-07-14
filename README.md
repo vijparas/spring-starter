@@ -3,7 +3,7 @@ Spring Starter is ready to go Spring Boot Project. Spring Starter has modified S
 
 
 ##### Database Configuration
-By Default Postgres driver is installed with the application. To use this application with default configuration install postgres and change database properties in application.properties
+By Default Postgres driver is installed with the application. To use this application with default configuration install postgres and change database properties in application.properties  
 spring.datasource.url=  
 spring.datasource.username=  
 spring.datasource.password=  
