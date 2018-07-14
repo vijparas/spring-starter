@@ -1,5 +1,5 @@
-# Spring Starter
-### Spring Starter is ready to go Spring Boot Project. Spring Starter has modified Spring Security Implementation By Providing an Annotation Based approach for Authentication and Authorization purpose. To add Authentication on any route just add @LoginRequired Annotation in your route definition. To add Authorization pass authorized roles in roles array in @LoginRequired Annotaion. For Database Integration JPA has been used. 
+#### Spring Starter
+Spring Starter is ready to go Spring Boot Project. Spring Starter has modified Spring Security Implementation By Providing an Annotation Based approach for Authentication and Authorization purpose. To add Authentication on any route just add @LoginRequired Annotation in your route definition. To add Authorization pass authorized roles in roles array in @LoginRequired Annotaion. For Database Integration JPA has been used. 
 
 
 ##### Database Configuration
@@ -19,10 +19,10 @@ liquibase-changelog-test.xml file is used to manage migrations for running test 
 
 #### Examples
 
-#####@LoginRequired(roles= {"admin","superadmin"})
+@LoginRequired(roles= {"admin","superadmin"})
 
-#####Above example will check if Logged in user belongs to admin/superadmin  role
+Above example will check if Logged in user belongs to admin/superadmin  role
 
-##### @Login Required()
-##### Above example will echeck if user is logged in or not.
+@Login Required()
+Above example will echeck if user is logged in or not.
 
