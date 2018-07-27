@@ -24,5 +24,5 @@ liquibase-changelog-test.xml file is used to manage migrations for running test 
 Above example will check if Logged in user belongs to admin/superadmin  role
 
 @Login Required()
-Above example will echeck if user is logged in or not.
+Above example will check if user is logged in or not.
 
