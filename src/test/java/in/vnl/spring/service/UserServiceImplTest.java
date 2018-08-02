@@ -1,24 +1,26 @@
 package in.vnl.spring.service;
 
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
 import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ActiveProfiles;
 
 import in.vnl.spring.converters.user.UserEntityToUserPojo;
 import in.vnl.spring.converters.user.UserPojoToUserEntity;
 import in.vnl.spring.converters.user.UserUpdatePojoToUserEntity;
 import in.vnl.spring.entity.UserEntity;
-import in.vnl.spring.entity.pojo.user.UserPojo;
 import in.vnl.spring.entity.pojo.user.UserUpdatePojo;
 import in.vnl.spring.exceptions.user.UserNameNotFoundException;
 import in.vnl.spring.repository.UserRepository;
 import in.vnl.spring.validation.UserValidation;
-import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.anyString;
+@ActiveProfiles("test")
 public class UserServiceImplTest {
 
 	@Mock

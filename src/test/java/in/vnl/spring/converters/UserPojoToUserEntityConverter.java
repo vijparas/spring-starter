@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.test.context.ActiveProfiles;
 
 import in.vnl.spring.converters.role.RolePojoToRoleEntity;
 import in.vnl.spring.converters.user.UserPojoToUserEntity;
@@ -15,6 +16,7 @@ import in.vnl.spring.service.RoleService;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+@ActiveProfiles("test")
 public class UserPojoToUserEntityConverter {
 
 	public static final long ID_VALUE = new Long(1L);

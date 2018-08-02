@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import in.vnl.spring.service.RoleService;
 import in.vnl.spring.service.UserService;
 
 import static org.mockito.Mockito.*;
+@ActiveProfiles("test")
 public class UserControllerTest {
 
 	@Mock

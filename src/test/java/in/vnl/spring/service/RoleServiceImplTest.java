@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ActiveProfiles;
 
 import in.vnl.spring.converters.role.RoleEntityToRolePojo;
 import in.vnl.spring.converters.role.RolePojoToRoleEntity;
@@ -27,6 +28,7 @@ import in.vnl.spring.repository.RoleRepository;
 import in.vnl.spring.service.RoleService;
 import in.vnl.spring.service.RoleServiceImpl;
 import in.vnl.spring.validation.RoleValidation;
+@ActiveProfiles("test")
 public class RoleServiceImplTest {
 
 	@Mock

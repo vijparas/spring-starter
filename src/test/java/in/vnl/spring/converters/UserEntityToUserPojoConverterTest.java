@@ -6,11 +6,12 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import in.vnl.spring.converters.user.UserEntityToUserPojo;
 import in.vnl.spring.entity.UserEntity;
 import in.vnl.spring.entity.pojo.user.UserPojo;
-
+@ActiveProfiles("test")
 public class UserEntityToUserPojoConverterTest {
 
 	public static final long ID_VALUE = new Long(1L);
