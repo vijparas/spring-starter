@@ -1,6 +1,7 @@
 package in.vnl.spring.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,14 +41,26 @@ public class RoleController {
 		catch(RoleNameNotUniqueException exception)
 		{
 			attributes.addAttribute("error", exception.getMessage());
+			System.out.println("-------------------------------");
+			System.out.println(exception.getMessage());
 		}
 		return "redirect:/role/list";
 
 	}
 
-	@GetMapping("/list")
-	public String displayRoles(Model model) {
-		model.addAttribute("roles", roleService.getAllRoles());
+	@GetMapping(value= {"/list","list/{pageNumber}"})
+	public String displayRoles(Model model,Optional<Integer> pagenumber) {
+		int pageNumber=1;
+		try {
+			if(pagenumber.isPresent()) {
+				pageNumber=pagenumber.get();
+			}
+			
+			model.addAttribute("roles", roleService.displayAll(pageNumber));
+		}
+		catch(Exception exception) {
+			
+		}
 		return "roles/display";
 	}
 

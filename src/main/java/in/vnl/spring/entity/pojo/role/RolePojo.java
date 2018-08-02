@@ -8,7 +8,7 @@ import in.vnl.spring.entity.pojo.user.UserPojo;
 public class RolePojo extends BasePojo {
 	private long id;
 	private String role;
-	private int active;
+	private String active;
 	private Set<UserPojo> users;
 	public long getId() {
 		return id;
@@ -22,14 +22,15 @@ public class RolePojo extends BasePojo {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public int getActive() {
+	
+	
+	
+	public String getActive() {
 		return active;
 	}
-	public void setActive(int active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
-	
-	
 	public Set<UserPojo> getUsers() {
 		return users;
 	}

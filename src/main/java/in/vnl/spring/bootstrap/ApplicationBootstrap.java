@@ -48,7 +48,7 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
 		RolePojo rolePojo = new RolePojo();
 		try {
 			
-			rolePojo.setActive(1);
+			rolePojo.setActive("Active");
 			rolePojo.setRole("Admin");
 			rolePojo=roleService.create(rolePojo);
 		}
@@ -70,7 +70,7 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
 			userPojo.setUsername("admin");
 			userPojo.setPassword("220386");
 			userPojo.setEmail("admin@vnl.in");
-			userPojo.setActive(1);
+			userPojo.setActive("Active");
 			userPojo.setFirstName("Admin");
 			userPojo.setLastName("VNL");
 			userPojo.setMobile("1234567890");

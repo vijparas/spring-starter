@@ -3,19 +3,34 @@ package in.vnl.spring.entity.pojo.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.springframework.lang.NonNull;
+
 import in.vnl.spring.entity.pojo.BasePojo;
 import in.vnl.spring.entity.pojo.role.RolePojo;
 
 public class UserPojo extends BasePojo {
 	 private long id;
+	 
+	 @NotBlank
+	 @Email
 	 private String email;
+	 @NotBlank
 	 private String username;
+	 @NotBlank
 	 private String password;
 	 private String confirmPassword;
 	 private String currentPassword;
+	 @NotBlank
 	 private String firstName;
+	 @NotBlank
 	 private String lastName;
-	 private int active;
+	 private String active;
+	 @Size(min=10,max=10)
 	 private String mobile;
 	 private List<Long> roles;
 	 private List<RolePojo> rolePojo=new ArrayList<>();
@@ -68,10 +83,11 @@ public class UserPojo extends BasePojo {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public int getActive() {
+	
+	public String getActive() {
 		return active;
 	}
-	public void setActive(int active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
 	public List<Long> getRoles() {

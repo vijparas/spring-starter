@@ -36,7 +36,6 @@ public class UserEntityToUserPojo implements Converter<UserEntity, UserPojo> {
 			userPojo.setMobile(userEntity.getMobile());
 			userPojo.setPassword(userEntity.getPassword());
 			userPojo.setUsername(userEntity.getUsername());
-			System.out.println(userPojo.getPassword());
 			List<Long> roles=new ArrayList<>();
 			List<RolePojo> rolePojo=new ArrayList<>();
 			for(RoleEntity roleEntity:userEntity.getRoles()) {

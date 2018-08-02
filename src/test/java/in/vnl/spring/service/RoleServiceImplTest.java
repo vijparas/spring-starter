@@ -56,7 +56,7 @@ public class RoleServiceImplTest {
 		long id=1;
 		RoleEntity roleEntity = new RoleEntity();
         roleEntity.setId(id);
-        roleEntity.setActive(1);
+        roleEntity.setActive("Active");
         roleEntity.setRole("Test");
         Set<UserEntity> users=new HashSet<>();
         roleEntity.setUsers(users);

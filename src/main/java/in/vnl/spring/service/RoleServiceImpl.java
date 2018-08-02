@@ -1,11 +1,14 @@
 package in.vnl.spring.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import in.vnl.spring.entity.pojo.role.RolePojo;
 import in.vnl.spring.exceptions.role.RoleNameDoesNotExistException;
 import in.vnl.spring.exceptions.validation.role.RoleNameNotUniqueException;
 import in.vnl.spring.repository.RoleRepository;
+import in.vnl.spring.utilities.PaginationObject;
 import in.vnl.spring.validation.RoleValidation;
 
 @Service
@@ -88,16 +92,29 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public List<RolePojo> displayAll() {
-		int pageNumber = 1;
-
-		List<RoleEntity> roles = roleRepository
-				.findAll(PageRequest.of(pageNumber - 1, PAGESIZE, Sort.Direction.ASC, "id")).getContent();
-		List<RolePojo> rolesPojo = new ArrayList<>();
-		for (RoleEntity role : roles) {
-			rolesPojo.add(roleEntityToRolePojoConverter.convert(role));
+	public Map<String, Object> displayAll(int pageNumber) {
+		
+		Map<String,Object> rolesMap=new HashMap<>();
+		try {
+			Page<RoleEntity> rolesPage=roleRepository
+					.findAll(PageRequest.of(pageNumber - 1, PAGESIZE, Sort.Direction.ASC, "id"));
+			
+			List<RoleEntity> roles = rolesPage.getContent();
+			
+			List<RolePojo> rolesPojo = new ArrayList<>();
+			for (RoleEntity role : roles) {
+				rolesPojo.add(roleEntityToRolePojoConverter.convert(role));
+			}
+			int numberOfPages=rolesPage.getTotalPages();
+			rolesMap.put("roles", rolesPojo);
+			rolesMap.put("pagination", new PaginationObject(numberOfPages, pageNumber));
 		}
-		return rolesPojo;
+		
+		catch(Exception exception) {
+			throw exception;
+		}
+		
+		return rolesMap;
 	}
 
 	@Override

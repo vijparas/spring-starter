@@ -2,45 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Vnl User Creation Panel</title>
+<!--/*/ <th:block th:include="fragments/header.html :: header">
+        </th:block> /*/-->
+<title>User Management Panel</title>
 
-   <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 </head>
 <body>
-<div class="container">
-    
-	<h2 th:text="${message}"></h2>
-    <h2>Roles</h2>
-    <div>
-        <table class="table">
-  <thead>
-    <tr>
-      
-      <th scope="col">User</th>
-      <th scope="col">Active</th>
-      <th scope="col">Roles</th>
-      <th scope="col">Update</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-  th:each="user : ${users}">
-    <td th:text="${user.firstName}" />
-    <td th:text="${user.active}" />
-	<td><p th:each="role:${user.rolePojo}" th:text="${role.role}"></p></td>
-	<td><a th:href="@{'/user/update/' + ${user.id}}" class="btn btn-primary">Update</a></td>
-	<td><a th:href="@{'/user/delete/' + ${user.id}}" class="btn btn-danger">Delete</a></td>
-</tr>
-  </tbody>
-</table>
-    </div>
-</div>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header.html :: navbar">
+        </th:block> /*/-->
+		<h2 th:text="${message}"></h2>
+		
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 mb-2">
+			<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6   ">
+				<button type="button" class="btn btn-primary" onclick="createUserView()">Create</button>
+		</div>
+		<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 mt-2">
+		
+			<table class="table">
+				<thead>
+					<tr>
 
+						<th scope="col">User</th>
+						<th scope="col">Active</th>
+						<th scope="col">Roles</th>
+						<th scope="col">Update</th>
+						<th scope="col">Update Password</th>
+						<th scope="col">Delete</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${users.users}">
+						<td th:text="${user.firstName}" />
+						<td th:text="${user.active}" />
+						<td><p th:each="role:${user.rolePojo}" th:text="${role.role}"></p></td>
+						<td><a th:href="@{'/user/update/' + ${user.id}}"
+							class="btn btn-primary">Update</a></td>
+						<td><a th:href="@{'/user/update/' + ${user.id}}"
+							class="btn btn-primary">Update Password</a></td>
+						<td><a th:href="@{'/user/delete/' + ${user.id}}"
+							class="btn btn-danger">Delete</a></td>
+						
+					</tr>
+					<tr>
+						<td colspan="6">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item" th:if="${users.pagination.currentPage==1}"><a
+										class="page-link">Previous</a>
+									<li class="page-item" th:unless="${users.pagination.currentPage==1}"><a
+										class="page-link"
+										th:href="@{'/user/list/' + ${users.pagination.currentPage-1}}">Previous</a>
+									 
+										
+										<li th:each="i : ${#numbers.sequence(1,users.pagination.totalPages)}" class="page-item"> <a class="page-link" th:href="@{'/user/list/' + ${i}}" th:text="${i}"></a></li>
+									
+									
+									<li class="page-item"><a class="page-link" href="#">Next</a></li>
+								</ul>
+							</nav>
+						</td>
+						
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<!--/*/ <th:block th:include="fragments/modal.html :: modal">
+        </th:block> /*/-->
+        <!--/*/ <th:block th:include="fragments/scripts.html :: scripts">
+        </th:block> /*/-->
+ <script th:src="@{/js/user/create-user.js}"></script>
+ 
 </body>
 </html>

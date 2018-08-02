@@ -2,20 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Vnl User Creation Panel</title>
+    <title>Roles</title>
+	
+  <link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/4.1.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
 
-   <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+	th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+<script th:src="@{/webjars/select2/4.0.5/js/select2.min.js}"></script>
+<link th:href="@{/webjars/select2/4.0.5/css/select2.min.css}"
+	rel="stylesheet" />
 </head>
 <body>
 <div class="container">
     
 
-    <h2>Product Details</h2>
+    <h2>Role Creatuib</h2>
     <div>
         <form class="form-horizontal" th:object="${role}" th:action="@{/role/create}" method="post">
             <input type="hidden" th:field="*{id}"/>
@@ -30,8 +34,8 @@
                 <label class="col-sm-2 control-label">Active </label>
                 <div class="col-sm-10">
                     <select class="form-control" name="active" >
-                    	<option value="0">No</option>
-                    	<option value="1">Yes</option>
+                    	<option value="InActive">No</option>
+                    	<option value="Active">Yes</option>
                     </select>
                 </div>
             </div>

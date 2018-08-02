@@ -51,7 +51,7 @@ public class UserControllerTest {
 		
 		mockMvc.perform(get("/user/create"))
         .andExpect(status().isOk())
-        .andExpect(view().name("user/create"))
+        .andExpect(view().name("user/create-modal"))
         .andExpect(model().attributeExists("roles"));
 	}
 	
@@ -64,11 +64,28 @@ public class UserControllerTest {
 	                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
 	                .param("firstName", "Paras")
 	                .param("lastName", "Vij")
+	                .param("username", "admin")
 	                .param("email", "vijparas@gmail.com")
+	                .param("mobile", "8725840872")
 	                .param("password", "220386")
 	        )
-	                .andExpect(status().is3xxRedirection())
-	                .andExpect(view().name("redirect:/user/list"));
+	                .andExpect(status().isOk());
+	                
+	}
+	
+	@Test
+	public void testUserCreationFailure() throws Exception{
+		 UserPojo userPojo=new UserPojo();
+		 userPojo.setId(2l);
+		 mockMvc.perform(post("/user/create")
+	                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+	                .param("firstName", "Paras")
+	                .param("lastName", "Vij")
+	                .param("email", "vijparas@gmail.com")
+	                .param("mobile", "8725840872")
+	                .param("password", "220386")
+	        )
+	                .andExpect(status().is4xxClientError());
 	}
 	
 	@Test
@@ -92,8 +109,16 @@ public class UserControllerTest {
                 .param("email", "vijparas@gmail.com")
                 .param("password", "220386")
                 )
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/user/list"));
+				
+			.andExpect(status().is4xxClientError());
 	}
+	
+	@Test
+	public void testUserUpdatePasswordForm() throws Exception{
+		mockMvc.perform(get("/user/password/update/{username}","admin"))
+		.andExpect(status().isOk())
+	        .andExpect(view().name("user/update-password"));
+	}
+	
 
 }

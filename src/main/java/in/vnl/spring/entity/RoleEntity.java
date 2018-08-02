@@ -5,7 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Converter;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +17,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import in.vnl.spring.converters.entities.ActiveRoleConverter;
 
 @Entity
 @Table(name="role")
@@ -26,9 +31,11 @@ public class RoleEntity extends BaseEntity{
 
     @Column(name = "role")
     private String role;
-
+    
+   
     @Column(name="active")
-    private int active;
+    @Convert(converter=ActiveRoleConverter.class)
+    private String active;
     
     @Column(name = "created_at")
 	@CreationTimestamp
@@ -38,13 +45,9 @@ public class RoleEntity extends BaseEntity{
 	@UpdateTimestamp
 	private LocalDateTime updatedDateTime;
 
-	@ManyToMany(mappedBy="roles")
-	
+	@ManyToMany(mappedBy="roles",fetch=FetchType.LAZY)
 	private Set<UserEntity> users;
     
-
-    
-
 	public String getRole() {
         return role;
     }
@@ -53,14 +56,16 @@ public class RoleEntity extends BaseEntity{
         this.role = role;
     }
 
-	public int getActive() {
+	
+	
+	public String getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
-	
+
 	public LocalDateTime getCreatedDateTime() {
 		return createdDateTime;
 	}

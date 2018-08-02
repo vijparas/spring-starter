@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import in.vnl.spring.converters.entities.ActiveUserConverter;
 
 @Entity
 @Table(name="users")
@@ -54,7 +57,8 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "active")
-    private int active;
+    @Convert(converter = ActiveUserConverter.class)
+    private String active;
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="user_role",
 	joinColumns=@JoinColumn(name="user_id"),
@@ -137,11 +141,12 @@ public class UserEntity extends BaseEntity implements UserDetails {
 		this.lastName = lastName;
 	}
 
-	public int getActive() {
+	
+	public String getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
 

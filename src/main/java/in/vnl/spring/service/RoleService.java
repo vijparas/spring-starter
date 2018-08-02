@@ -1,6 +1,7 @@
 package in.vnl.spring.service;
 
 import java.util.List;
+import java.util.Map;
 
 import in.vnl.spring.entity.pojo.role.RolePojo;
 import in.vnl.spring.exceptions.role.RoleNameDoesNotExistException;
@@ -11,7 +12,7 @@ public interface RoleService {
 	public RolePojo create(RolePojo rolePojo) throws RoleNameNotUniqueException;
 	public RolePojo delete(RolePojo rolePojo);
 	public RolePojo update(RolePojo rolePojo);
-	public List<RolePojo> displayAll();
+	public Map<String,Object> displayAll(int pagenumber);
 	public RolePojo getRole(long id);
 	public List<RolePojo> getAllRoles();
 	public List<RolePojo> saveAllRoles(List<RolePojo> roles);

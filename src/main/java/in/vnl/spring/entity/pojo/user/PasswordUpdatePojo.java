@@ -1,10 +1,17 @@
 package in.vnl.spring.entity.pojo.user;
 
+import javax.validation.constraints.NotBlank;
+
 public class PasswordUpdatePojo {
 
+	@NotBlank
 	private String currentPassword;
+	@NotBlank
 	private String newPassword;
+	@NotBlank
 	private String confirmPassword;
+	@NotBlank
+	private String username;
 	public String getCurrentPassword() {
 		return currentPassword;
 	}
@@ -23,6 +30,14 @@ public class PasswordUpdatePojo {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
 	
 	
 }

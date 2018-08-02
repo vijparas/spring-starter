@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
+<!--/*/ <th:block th:include="fragments/header.html :: header">
+        </th:block> /*/-->
+<title>Roles</title>
 
-    <title>Vnl User Creation Panel</title>
 
-   <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 </head>
 <body>
-<div class="container">
-    
-	<h2 th:text="${message}"></h2>
-    <h2>Roles</h2>
-    <div>
-        <table class="table">
-  <thead>
-    <tr>
-      
-      <th scope="col">Role</th>
-      <th scope="col">Active</th>
-      <th scope="col">Update</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-  th:each="role : ${roles}">
-    <td th:text="${role.role}" />
-    <td th:text="${role.active}" />
-	<td><a th:href="@{'/role/update/' + ${role.id}}" class="btn btn-primary">Update</a></td>
-	<td><a th:href="@{'/role/delete/' + ${role.id}}" class="btn btn-danger">Delete</a></td>
-</tr>
-  </tbody>
-</table>
-    </div>
-</div>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header.html :: navbar">
+        </th:block> /*/-->
+		<h2 th:text="${message}"></h2>
+		<h2>Roles</h2>
+		<div>
+			<table class="table">
+				<thead>
+					<tr>
+
+						<th scope="col">Role</th>
+						<th scope="col">Active</th>
+						<th scope="col">Update</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="role : ${roles.roles}">
+						<td th:text="${role.role}" />
+						<td th:text="${role.active}" />
+						<td><a th:href="@{'/role/update/' + ${role.id}}"
+							class="btn btn-primary">Update</a></td>
+						<td><a th:href="@{'/role/delete/' + ${role.id}}"
+							class="btn btn-danger">Delete</a></td>
+					</tr>
+					
+					<tr>
+						<td colspan="4">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item" th:if="${roles.pagination.currentPage==1}"><a
+										class="page-link">Previous</a>
+									<li class="page-item" th:unless="${roles.pagination.currentPage==1}"><a
+										class="page-link"
+										th:href="@{'/role/list/' + ${roles.pageination.currentPage-1}}">Previous</a>
+									 
+										
+										<li th:each="i : ${#numbers.sequence(1,roles.pagination.totalPages)}" class="page-item"> <a class="page-link" th:href="@{'/role/list/' + ${i}}" th:text="${i}"></a></li>
+									
+									
+									<li class="page-item"><a class="page-link" href="#">Next</a></li>
+								</ul>
+							</nav>
+						</td>
+						
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 </body>
 </html>

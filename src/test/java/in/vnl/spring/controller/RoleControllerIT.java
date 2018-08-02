@@ -8,9 +8,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -18,6 +22,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -31,80 +36,74 @@ import in.vnl.spring.service.RoleService;
 import in.vnl.spring.validation.RoleValidation;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@ActiveProfiles("test")
+@SpringBootTest()
+@TestPropertySource(locations = "classpath:application-test.yml")
 public class RoleControllerIT {
 
-//	@Autowired
-//	private RoleService roleService;
-//
-//	@Autowired
-//	private RoleRepository roleRepository;
-//
-//	@Autowired
-//	private RoleValidation roleValidation;
-//
-//	@Autowired
-//	private RolePojoToRoleEntity rolePojoToRoleEntity;
-//
-//	@Autowired
-//	private RoleEntityToRolePojo roleEntityToRolePojo;
-//
-//	@Autowired
-//	private RoleController roleController;
-//
-//	MockMvc mockMvc;
-//
-//	@Before
-//	public void setup() {
-//
-//		mockMvc = MockMvcBuilders.standaloneSetup(roleController).build();
-//
-//	}
-//
-//	@Test
-//	public void testCreateRole() throws Exception {
-//
-//		List<RolePojo> beforeCreation=roleService.getAllRoles();
-//		mockMvc.perform(
-//				post("/role/create").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("role", "Test Role"))
-//				.andExpect(status().is3xxRedirection())
-//
-//				.andExpect(view().name("redirect:/role/list"));
-//		
-//		List<RolePojo> rolePojo=roleService.getAllRoles();
-//		
-//		
-//		assertEquals(beforeCreation.size()+1, rolePojo.size());
-//	}
-//	
-//	@Test
-//	public void testUpdateRole() throws Exception{
-//		RolePojo beforeUpdate=roleService.getRole(1l);
-//		mockMvc.perform(
-//				post("/role/update").contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//				.param("role", "New Test Role")
-//				.param("id", "1")
-//				)
-//				.andExpect(status().is3xxRedirection())
-//
-//				.andExpect(view().name("redirect:/role/list"));
-//		
-//		RolePojo afterUpdate=roleService.getRole(1l);
-//		assertEquals(afterUpdate.getRole(), "New Test Role");
-//	}
-//	
-//	@Test
-//	public void testDeleteRole() throws Exception {
-//		List<RolePojo> rolePojo=roleService.getAllRoles();
-//		mockMvc.perform(
-//				get("/role/delete/1").contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//				
-//				)
-//				.andExpect(status().is3xxRedirection())
-//
-//				.andExpect(view().name("redirect:/role/list"));
-//		assertEquals(rolePojo.size()-1, roleService.getAllRoles().size());
-//	}
+	@Autowired
+	private RoleService roleService;
+
+	
+	@Autowired
+	private RoleController roleController;
+
+	MockMvc mockMvc;
+
+	@Before
+	public void setup() {
+
+		mockMvc = MockMvcBuilders.standaloneSetup(roleController).build();
+		
+	}
+
+	@Test
+	@Transactional
+	public void testCreateRole() throws Exception {
+
+		List<RolePojo> beforeCreation=roleService.getAllRoles();
+		mockMvc.perform(
+				post("/role/create").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("role", "Random Role")
+				.param("active","Active"))
+				.andExpect(status().is3xxRedirection())
+
+				.andExpect(view().name("redirect:/role/list"));
+		
+		List<RolePojo> rolePojo=roleService.getAllRoles();
+		
+		
+		assertEquals(beforeCreation.size()+1,rolePojo.size());
+	}
+	
+	@Test
+	@Transactional
+	public void testUpdateRole() throws Exception{
+		RolePojo beforeUpdate=roleService.getAllRoles().get(0);
+		mockMvc.perform(
+				post("/role/update").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("role", "New Test Role")
+				.param("id", Long.toString(beforeUpdate.getId()))
+				)
+				.andExpect(status().is3xxRedirection())
+
+				.andExpect(view().name("redirect:/role/list"));
+		
+		RolePojo afterUpdate=roleService.getRole(beforeUpdate.getId());
+		assertEquals("New Test Role", afterUpdate.getRole());
+	}
+	
+	@Test
+	@Transactional
+	public void testDeleteRole() throws Exception {
+		List<RolePojo> rolePojo=roleService.getAllRoles();
+		mockMvc.perform(
+				get("/role/delete/"+rolePojo.get(0).getId()).contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				
+				)
+				.andExpect(status().is3xxRedirection())
+
+				.andExpect(view().name("redirect:/role/list"));
+		assertEquals(rolePojo.size()-1, roleService.getAllRoles().size());
+	}
 
 }

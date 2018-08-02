@@ -27,7 +27,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		try {
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
-		
+			
 			if(handlerMethod.getMethod().isAnnotationPresent(LoginRequired.class)) {
 				LoginRequired loginRequired=handlerMethod.getMethod().getAnnotation(LoginRequired.class);
 				String[] roles=loginRequired.roles();
@@ -45,7 +45,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect("/");
 		}
 		catch(Exception exception) {
-			System.out.println(exception.getMessage());
+			
 		}
 		
 		return super.preHandle(request, response, handler);

@@ -11,6 +11,7 @@ import in.vnl.spring.entity.UserEntity;
 import in.vnl.spring.entity.pojo.BasePojo;
 import in.vnl.spring.entity.pojo.user.UserPojo;
 import in.vnl.spring.entity.pojo.user.UserUpdatePojo;
+import in.vnl.spring.exceptions.user.CurrentPasswordDoNotMatchException;
 import in.vnl.spring.exceptions.validation.user.UsernameNotUniqueException;
 import in.vnl.spring.repository.UserRepository;
 import in.vnl.spring.service.UserService;
@@ -55,7 +56,21 @@ public class UserValidation  {
 			throw exception;
 		}
 		catch (Exception exception) {
-			// TODO: handle exception
+			throw exception;
+		}
+	}
+	
+	public void validateCurrentPassword(String currentPassword,String  password) throws CurrentPasswordDoNotMatchException{
+		try {
+			if(!currentPassword.equals(password)) {
+				throw new CurrentPasswordDoNotMatchException();
+			}
+		}
+		catch(CurrentPasswordDoNotMatchException exception) {
+			throw exception;
+		}
+		catch(Exception exception) {
+			throw exception;
 		}
 	}
 
