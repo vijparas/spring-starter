@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,8 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import in.vnl.spring.annotations.Authorized;
 import in.vnl.spring.annotations.LoginRequired;
-import in.vnl.spring.annotations.ManagedMethod;
-import in.vnl.spring.entity.UserEntity;
 import in.vnl.spring.entity.pojo.user.PasswordUpdatePojo;
 import in.vnl.spring.entity.pojo.user.UserPojo;
 import in.vnl.spring.entity.pojo.user.UserUpdatePojo;
