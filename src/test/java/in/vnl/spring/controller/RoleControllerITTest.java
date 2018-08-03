@@ -38,6 +38,7 @@ import in.vnl.spring.validation.RoleValidation;
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @TestPropertySource(locations = "classpath:application-test.yml")
+@ActiveProfiles("test")
 public class RoleControllerITTest {
 
 	@Autowired

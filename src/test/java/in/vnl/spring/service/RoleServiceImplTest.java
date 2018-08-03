@@ -29,6 +29,7 @@ import in.vnl.spring.service.RoleService;
 import in.vnl.spring.service.RoleServiceImpl;
 import in.vnl.spring.validation.RoleValidation;
 @ActiveProfiles("test")
+
 public class RoleServiceImplTest {
 
 	@Mock
