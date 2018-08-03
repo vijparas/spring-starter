@@ -17,7 +17,7 @@ import in.vnl.spring.service.RoleService;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 @ActiveProfiles("test")
-public class UserPojoToUserEntityConverter {
+public class UserPojoToUserEntityConverterTest {
 
 	public static final long ID_VALUE = new Long(1L);
 	UserPojoToUserEntity converter;

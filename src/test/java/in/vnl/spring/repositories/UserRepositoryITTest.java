@@ -36,7 +36,7 @@ import in.vnl.spring.repository.UserRepository;
 @TestPropertySource(locations = "classpath:application-test.yml")
 
 
-public class UserRepositoryIT {
+public class UserRepositoryITTest {
 
 	@Autowired
 	private UserRepository userRepository;

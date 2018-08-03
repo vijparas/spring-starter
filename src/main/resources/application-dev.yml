@@ -1,3 +1,10 @@
-vnl:
-  jms:
-    username: Dev Username
+spring:
+  liquibase:
+    change-log:  classpath:db/liquibase-changelog.xml
+  datasource:
+    platform: org.hibernate.dialect.PostgreSQLDialect 
+    url: jdbc:postgresql://localhost:5432/vnl-spring-application 
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: password
+   

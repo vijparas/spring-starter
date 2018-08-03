@@ -18,7 +18,7 @@ import in.vnl.spring.exceptions.validation.user.UsernameNotUniqueException;
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @TestPropertySource(locations = "classpath:application-test.yml")
-public class UserServiceIT {
+public class UserServiceITTest {
 
 	@Autowired
 	private UserService userService;
